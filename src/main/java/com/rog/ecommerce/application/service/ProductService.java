@@ -4,6 +4,8 @@ import com.rog.ecommerce.application.repository.ProductRepository;
 import com.rog.ecommerce.domain.Product;
 import com.rog.ecommerce.domain.User;
 
+import java.time.LocalDateTime;
+
 public class ProductService {
 
     private final ProductRepository productRepository;
@@ -20,9 +22,22 @@ public class ProductService {
     public Product getProductById(Integer id){
         return productRepository.getProductById(id);
     }
+
+
+
     public Product saveProduct(Product product){
-        return productRepository.saveProduct(product);
+
+        User user = new User();
+        user.setId(1);
+        product.setDateCreated(LocalDateTime.now());
+        product.setDateUpdated(LocalDateTime.now());
+        product.setUser(user);
+        return   productRepository.saveProduct(product);
     }
+
+
+
+
     public void deleteProductById(Integer id){
         productRepository.deleteProductById(id);
     }
