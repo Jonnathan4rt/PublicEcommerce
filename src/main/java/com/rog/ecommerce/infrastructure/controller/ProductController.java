@@ -6,10 +6,12 @@ import com.rog.ecommerce.domain.User;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+
 @Controller
 @RequestMapping("/admin/products")
 @Slf4j
@@ -27,12 +29,14 @@ public class ProductController {
     }
 
     @PostMapping("/save-product")
-    public String saveProduct(Product product){
-        log.info("Nombre de producto: {}", product);
-        productService.saveProduct(product);
+    public String saveProduct(Product product, @RequestParam("img") MultipartFile multipartFile) throws IOException {
+        log.info("Nombre de producto: {}", product, multipartFile);
+        productService.saveProduct(product, multipartFile);
         //return "admin/products/create";
         return "redirect:/admin";
     }
+
+
     @GetMapping("/show")
     public String showProduct(Model model){
         User user = new User();
@@ -42,6 +46,21 @@ public class ProductController {
         //model.addAttribute("products", products);
         return "admin/products/show";
     }
+
+    @GetMapping("/edit/{id}")
+    public String editProduct(@PathVariable Integer id, Model model){
+        Product product = productService.getProductById(id);
+        log.info("Product obtenido: {}", product);
+        model.addAttribute("product",product);
+        return "admin/products/edit";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable Integer id) {
+        productService.deleteProductById(id);
+        return "redirect:/admin/products/show";
+    }
+
 
 }
 
