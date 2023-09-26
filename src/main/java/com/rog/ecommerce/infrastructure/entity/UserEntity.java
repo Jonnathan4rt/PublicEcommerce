@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -26,6 +25,5 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     private UserType userType;
     private LocalDateTime dateCreated;
-    private LocalDateTime localDateTime;
 
 }

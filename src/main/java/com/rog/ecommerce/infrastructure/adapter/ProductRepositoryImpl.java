@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class ProductRepositoryImpl implements ProductRepository {
-
     private final ProductCrudRepository productCrudRepository;
     private final ProductMapper productMapper;
     private final UserMapper userMapper;
@@ -22,26 +21,21 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public Iterable<Product> getProducts() {
-
-
         return productMapper.toProducts(productCrudRepository.findAll());
     }
 
     @Override
     public Iterable<Product> getProductsByUser(User user) {
-
-        return productMapper.toProducts(productCrudRepository.findByuserEntity(userMapper.toUserEntity(user)));
+        return productMapper.toProducts(productCrudRepository.findByUserEntity(userMapper.toUserEntity(user)) );
     }
 
     @Override
     public Product getProductById(Integer id) {
-
         return productMapper.toProduct(productCrudRepository.findById(id).get());
     }
 
     @Override
     public Product saveProduct(Product product) {
-
         return productMapper.toProduct( productCrudRepository.save(productMapper.toProductEntity(product) ) );
     }
 

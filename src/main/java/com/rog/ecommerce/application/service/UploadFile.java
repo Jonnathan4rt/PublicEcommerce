@@ -16,7 +16,7 @@ public class UploadFile {
         if (!multipartFile.isEmpty()){
             byte [] bytes = multipartFile.getBytes();
             Path path = Paths.get(FOLDER + multipartFile.getOriginalFilename());
-            Files.write(path ,bytes );
+            Files.write(path ,bytes);
             return multipartFile.getOriginalFilename();
         }
         return IMG_DEFAULT;
@@ -26,4 +26,5 @@ public class UploadFile {
         File file = new File(FOLDER + nameFile);
         file.delete();
     }
+
 }

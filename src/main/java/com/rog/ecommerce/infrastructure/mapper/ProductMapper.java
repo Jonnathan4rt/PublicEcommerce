@@ -2,7 +2,7 @@ package com.rog.ecommerce.infrastructure.mapper;
 
 import com.rog.ecommerce.domain.Product;
 import com.rog.ecommerce.infrastructure.entity.ProductEntity;
-import org.mapstruct.InheritConfiguration;
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -17,12 +17,13 @@ public interface ProductMapper {
                     @Mapping(source = "price", target = "price"),
                     @Mapping(source = "dateCreated", target = "dateCreated"),
                     @Mapping(source = "dateUpdated", target = "dateUpdated"),
-                    @Mapping(source = "userEntity", target = "user"),
+                    @Mapping(source = "userEntity", target = "user")
+
             }
     )
     Product toProduct(ProductEntity productEntity);
     Iterable<Product> toProducts (Iterable<ProductEntity> productEntities);
 
-    @InheritConfiguration
-    ProductEntity toProductEntity(Product product);
+    @InheritInverseConfiguration
+    ProductEntity toProductEntity (Product product);
 }

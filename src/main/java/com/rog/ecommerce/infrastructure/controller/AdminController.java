@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-
     private final ProductService productService;
 
     public AdminController(ProductService productService) {
@@ -24,6 +23,6 @@ public class AdminController {
         user.setId(1);
         Iterable<Product> products = productService.getProductsByUser(user);
         model.addAttribute("products", products);
-        return  "admin/home";
+        return "admin/home";
     }
 }

@@ -2,7 +2,6 @@ package com.rog.ecommerce.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.math.BigDecimal;
@@ -14,7 +13,7 @@ import java.util.UUID;
 @ToString
 public class Product {
     private Integer id;
-    private String code;
+    private  String code;
     private String name;
     private String description;
     private String image;
@@ -29,5 +28,3 @@ public class Product {
         this.setCode(UUID.randomUUID().toString());
     }
 }
-
-
